@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <NativeReference Include="StoreKit2Framework.framework">
+    <NativeReference Include="StoreKit2Framework.xcframework">
       <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
       <Frameworks>StoreKit</Frameworks>
