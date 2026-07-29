@@ -140,6 +140,12 @@ import StoreKit
     // Transaction.environment is unavailable.
     @objc public let environment: String
 
+    // Which offer bought the current period: "introductory" / "promotional" /
+    // "code"; nil when it was bought at the regular price. Note this names the
+    // offer, not its payment mode — whether an introductory offer is a free
+    // trial depends on how it's configured in App Store Connect.
+    @objc public let offerType: String?
+
     public init(transaction: Transaction) {
         self.transactionId = String(transaction.id)
         self.productId = transaction.productID
@@ -152,6 +158,25 @@ import StoreKit
             self.environment = transaction.environment.rawValue
         } else {
             self.environment = "unknown"
+        }
+
+        let rawOfferType: Transaction.OfferType?
+        if #available(iOS 17.2, *) {
+            rawOfferType = transaction.offer?.type
+        } else {
+            rawOfferType = transaction.offerType
+        }
+        switch rawOfferType {
+        case .introductory:
+            self.offerType = "introductory"
+        case .promotional:
+            self.offerType = "promotional"
+        case .code:
+            self.offerType = "code"
+        case .some:
+            self.offerType = "unknown"
+        case nil:
+            self.offerType = nil
         }
         
         if let reason = transaction.revocationReason {

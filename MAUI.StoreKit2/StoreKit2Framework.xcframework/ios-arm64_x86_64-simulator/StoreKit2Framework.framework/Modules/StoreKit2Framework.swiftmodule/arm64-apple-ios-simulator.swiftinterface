@@ -46,6 +46,7 @@ import _SwiftConcurrencyShims
   @objc final public let revocationReason: Swift.String?
   @objc final public let expirationDate: Foundation.Date?
   @objc final public let environment: Swift.String
+  @objc final public let offerType: Swift.String?
   public init(transaction: StoreKit.Transaction)
   @objc deinit
 }

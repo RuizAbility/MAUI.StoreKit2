@@ -1683,6 +1683,73 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "offerType",
+            "printedName": "offerType",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@StoreKit2Framework@objc(cs)PaymentTransaction(py)offerType",
+            "mangledName": "$s18StoreKit2Framework18PaymentTransactionC9offerTypeSSSgvp",
+            "moduleName": "StoreKit2Framework",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@StoreKit2Framework@objc(cs)PaymentTransaction(im)offerType",
+                "mangledName": "$s18StoreKit2Framework18PaymentTransactionC9offerTypeSSSgvg",
+                "moduleName": "StoreKit2Framework",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(transaction:)",
@@ -4125,49 +4192,49 @@
     {
       "filePath": "\/Users\/ruizability-evan\/MAUI.StoreKit2\/StoreKit2Framework\/StoreKit2Framework\/StoreKit2Framework.swift",
       "kind": "IntegerLiteral",
-      "offset": 9999,
+      "offset": 10906,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/ruizability-evan\/MAUI.StoreKit2\/StoreKit2Framework\/StoreKit2Framework\/StoreKit2Framework.swift",
       "kind": "IntegerLiteral",
-      "offset": 10026,
+      "offset": 10933,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/ruizability-evan\/MAUI.StoreKit2\/StoreKit2Framework\/StoreKit2Framework\/StoreKit2Framework.swift",
       "kind": "IntegerLiteral",
-      "offset": 10047,
+      "offset": 10954,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/ruizability-evan\/MAUI.StoreKit2\/StoreKit2Framework\/StoreKit2Framework\/StoreKit2Framework.swift",
       "kind": "IntegerLiteral",
-      "offset": 10071,
+      "offset": 10978,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/ruizability-evan\/MAUI.StoreKit2\/StoreKit2Framework\/StoreKit2Framework\/StoreKit2Framework.swift",
       "kind": "IntegerLiteral",
-      "offset": 10100,
+      "offset": 11007,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/ruizability-evan\/MAUI.StoreKit2\/StoreKit2Framework\/StoreKit2Framework\/StoreKit2Framework.swift",
       "kind": "IntegerLiteral",
-      "offset": 10120,
+      "offset": 11027,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/ruizability-evan\/MAUI.StoreKit2\/StoreKit2Framework\/StoreKit2Framework\/StoreKit2Framework.swift",
       "kind": "Dictionary",
-      "offset": 10859,
+      "offset": 11766,
       "length": 3,
       "value": "[]"
     }

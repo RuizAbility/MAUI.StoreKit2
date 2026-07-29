@@ -473,6 +473,7 @@ SWIFT_CLASS("_TtC18StoreKit2Framework18PaymentTransaction") SWIFT_AVAILABILITY(i
 @property (nonatomic, readonly, copy) NSString * _Nullable revocationReason;
 @property (nonatomic, readonly, copy) NSDate * _Nullable expirationDate;
 @property (nonatomic, readonly, copy) NSString * _Nonnull environment;
+@property (nonatomic, readonly, copy) NSString * _Nullable offerType;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

@@ -375,6 +375,16 @@ namespace StoreKit2
         // @property (readonly, copy, nonatomic) NSString * _Nonnull environment;
         [Export("environment")]
         string Environment { get; }
+
+        /// <summary>
+        /// Which offer bought the current period: "introductory", "promotional", or "code";
+        /// null when it was bought at the regular price. Names the offer, not its payment
+        /// mode — whether an introductory offer is a free trial depends on how it's
+        /// configured in App Store Connect.
+        /// </summary>
+        // @property (readonly, copy, nonatomic) NSString * _Nullable offerType;
+        [NullAllowed, Export("offerType")]
+        string OfferType { get; }
     }
 
     /// <summary>
