@@ -137,6 +137,17 @@ namespace StoreKit2
         // -(void)getCurrentEntitlementsWithCompletion:(void (^ _Nonnull)(NSArray<PaymentTransaction *> * _Nonnull))completion;
         [Export("getCurrentEntitlementsWithCompletion:")]
         void GetCurrentEntitlements(Action<PaymentTransaction[]> completion);
+
+        /// <summary>
+        /// Presents the App Store's manage-subscriptions sheet in-app, scoped to this app's
+        /// subscription group and the account that bought it (sandbox/TestFlight land on
+        /// sandbox subscriptions). Selecting the running plan there is also how a queued plan
+        /// change is reverted. Completes when the sheet is dismissed.
+        /// </summary>
+        /// <param name="completion">The completion handler receiving success and an error message.</param>
+        // -(void)showManageSubscriptionsWithCompletion:(void (^ _Nonnull)(BOOL, NSString * _Nullable))completion;
+        [Export("showManageSubscriptionsWithCompletion:")]
+        void ShowManageSubscriptions(Action<bool, NSString> completion);
     }
 
     /// <summary>

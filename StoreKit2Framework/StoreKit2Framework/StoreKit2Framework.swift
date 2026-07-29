@@ -7,6 +7,7 @@
 
 import Foundation
 import StoreKit
+import UIKit
 
 @available(iOS 15.0, *)
 @objc public protocol PaymentManagerDelegate: AnyObject {
@@ -558,6 +559,32 @@ import StoreKit
                 await MainActor.run {
                     completion("unknown", error.localizedDescription)
                 }
+            }
+        }
+    }
+
+    // Presents the App Store's manage-subscriptions sheet in-app, scoped to
+    // this app's subscription group and the account that bought it (so sandbox
+    // and TestFlight land on sandbox subscriptions — the account.apple.com URL
+    // route only reaches the production account's list). Selecting the running
+    // plan there is also how a queued plan change is reverted. Completes when
+    // the sheet is dismissed.
+    @objc public func showManageSubscriptions(completion: @escaping (Bool, String?) -> Void) {
+        Task { @MainActor in
+            guard let scene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive })
+                ?? UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).first
+            else {
+                completion(false, "No window scene to present on")
+                return
+            }
+
+            do {
+                try await AppStore.showManageSubscriptions(in: scene)
+                completion(true, nil)
+            } catch {
+                completion(false, error.localizedDescription)
             }
         }
     }

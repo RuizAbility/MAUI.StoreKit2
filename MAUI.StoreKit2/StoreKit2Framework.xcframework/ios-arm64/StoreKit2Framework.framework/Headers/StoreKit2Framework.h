@@ -393,6 +393,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PaymentManag
 - (void)getSubscriptionStatusWithProductId:(NSString * _Nonnull)productId completion:(void (^ _Nonnull)(NSArray<PaymentSubscriptionStatus *> * _Nonnull, NSString * _Nullable))completion;
 - (void)checkIntroOfferEligibilityWithProductId:(NSString * _Nonnull)productId completion:(void (^ _Nonnull)(BOOL, NSString * _Nullable))completion;
 - (void)getAppEnvironmentWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull, NSString * _Nullable))completion;
+- (void)showManageSubscriptionsWithCompletion:(void (^ _Nonnull)(BOOL, NSString * _Nullable))completion;
 - (void)getCurrentEntitlementsWithCompletion:(void (^ _Nonnull)(NSArray<PaymentTransaction *> * _Nonnull))completion;
 - (void)checkPurchaseStatusWithProductId:(NSString * _Nonnull)productId completion:(void (^ _Nonnull)(BOOL, PaymentTransaction * _Nullable))completion;
 @end

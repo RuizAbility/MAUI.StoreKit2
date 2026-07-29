@@ -5,6 +5,7 @@
 import Foundation
 import StoreKit
 import Swift
+import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
@@ -98,6 +99,7 @@ import _SwiftConcurrencyShims
   @objc public func getSubscriptionStatus(productId: Swift.String, completion: @escaping ([StoreKit2Framework.PaymentSubscriptionStatus], Swift.String?) -> Swift.Void)
   @objc public func checkIntroOfferEligibility(productId: Swift.String, completion: @escaping (Swift.Bool, Swift.String?) -> Swift.Void)
   @objc public func getAppEnvironment(completion: @escaping (Swift.String, Swift.String?) -> Swift.Void)
+  @objc public func showManageSubscriptions(completion: @escaping (Swift.Bool, Swift.String?) -> Swift.Void)
   @objc public func getCurrentEntitlements(completion: @escaping ([StoreKit2Framework.PaymentTransaction]) -> Swift.Void)
   @objc public func checkPurchaseStatus(productId: Swift.String, completion: @escaping (Swift.Bool, StoreKit2Framework.PaymentTransaction?) -> Swift.Void)
 }

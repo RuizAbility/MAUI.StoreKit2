@@ -19,7 +19,7 @@
 
     <!-- NuGet Package Information -->
     <PackageId>StoreKit2</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>Yuting Li</Authors>
     <Company>Shanghai Jiuqianji Technology Co., Ltd.</Company>
     <Product>MAUI StoreKit2 IAP Module</Product>
