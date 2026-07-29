@@ -374,6 +374,8 @@ extern "C" {
 @class NSString;
 @class NSUUID;
 @class PaymentProduct;
+@class PaymentPurchaseResult;
+@class PaymentSubscriptionStatus;
 @class PaymentTransaction;
 SWIFT_CLASS("_TtC18StoreKit2Framework14PaymentManager") SWIFT_AVAILABILITY(ios,introduced=15.0)
 @interface PaymentManager : NSObject
@@ -387,6 +389,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PaymentManag
 - (void)restorePurchasesWithCompletion:(void (^ _Nonnull)(BOOL, NSString * _Nullable))completion;
 - (PaymentProduct * _Nullable)getProductWithProductId:(NSString * _Nonnull)productId SWIFT_WARN_UNUSED_RESULT;
 - (NSArray<PaymentProduct *> * _Nonnull)getAllProducts SWIFT_WARN_UNUSED_RESULT;
+- (void)purchaseProductWithResultWithProductId:(NSString * _Nonnull)productId appAccountToken:(NSUUID * _Nullable)appAccountToken completion:(void (^ _Nonnull)(PaymentPurchaseResult * _Nonnull))completion;
+- (void)getSubscriptionStatusWithProductId:(NSString * _Nonnull)productId completion:(void (^ _Nonnull)(NSArray<PaymentSubscriptionStatus *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkIntroOfferEligibilityWithProductId:(NSString * _Nonnull)productId completion:(void (^ _Nonnull)(BOOL, NSString * _Nullable))completion;
+- (void)getAppEnvironmentWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull, NSString * _Nullable))completion;
+- (void)getCurrentEntitlementsWithCompletion:(void (^ _Nonnull)(NSArray<PaymentTransaction *> * _Nonnull))completion;
 - (void)checkPurchaseStatusWithProductId:(NSString * _Nonnull)productId completion:(void (^ _Nonnull)(BOOL, PaymentTransaction * _Nullable))completion;
 @end
 
@@ -397,6 +404,7 @@ SWIFT_PROTOCOL("_TtP18StoreKit2Framework22PaymentManagerDelegate_") SWIFT_AVAILA
 - (void)paymentManagerDidFailPurchase:(NSString * _Nonnull)productId error:(NSString * _Nonnull)error;
 - (void)paymentManagerDidUpdateProducts:(NSArray<PaymentProduct *> * _Nonnull)products;
 - (void)paymentManagerDidRestorePurchases:(NSArray<PaymentTransaction *> * _Nonnull)transactions;
+- (void)paymentManagerDidReceiveTransactionUpdate:(PaymentTransaction * _Nonnull)transaction;
 @end
 
 @class NSDecimalNumber;
@@ -408,11 +416,53 @@ SWIFT_CLASS("_TtC18StoreKit2Framework14PaymentProduct") SWIFT_AVAILABILITY(ios,i
 @property (nonatomic, readonly, strong) NSDecimalNumber * _Nonnull price;
 @property (nonatomic, readonly, copy) NSString * _Nonnull displayPrice;
 @property (nonatomic, readonly, copy) NSString * _Nonnull productType;
+@property (nonatomic, readonly, copy) NSString * _Nullable subscriptionGroupId;
+@property (nonatomic, readonly, copy) NSString * _Nullable subscriptionPeriodUnit;
+@property (nonatomic, readonly) NSInteger subscriptionPeriodValue;
+@property (nonatomic, readonly, copy) NSString * _Nullable introOfferPaymentMode;
+@property (nonatomic, readonly, strong) NSDecimalNumber * _Nullable introOfferPrice;
+@property (nonatomic, readonly, copy) NSString * _Nullable introOfferDisplayPrice;
+@property (nonatomic, readonly, copy) NSString * _Nullable introOfferPeriodUnit;
+@property (nonatomic, readonly) NSInteger introOfferPeriodValue;
+@property (nonatomic, readonly) NSInteger introOfferPeriodCount;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+SWIFT_ENUM_FWD_DECL(NSInteger, PaymentPurchaseResultCode)
+SWIFT_CLASS("_TtC18StoreKit2Framework21PaymentPurchaseResult") SWIFT_AVAILABILITY(ios,introduced=15.0)
+@interface PaymentPurchaseResult : NSObject
+@property (nonatomic, readonly) enum PaymentPurchaseResultCode code;
+@property (nonatomic, readonly, strong) PaymentTransaction * _Nullable transaction;
+@property (nonatomic, readonly, copy) NSString * _Nullable errorMessage;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, PaymentPurchaseResultCode, open) {
+  PaymentPurchaseResultCodeSuccess = 0,
+  PaymentPurchaseResultCodeUserCancelled = 1,
+  PaymentPurchaseResultCodePending = 2,
+  PaymentPurchaseResultCodeUnverified = 3,
+  PaymentPurchaseResultCodeProductNotFound = 4,
+  PaymentPurchaseResultCodeFailed = 5,
+};
+
 @class NSDate;
+SWIFT_CLASS("_TtC18StoreKit2Framework25PaymentSubscriptionStatus") SWIFT_AVAILABILITY(ios,introduced=15.0)
+@interface PaymentSubscriptionStatus : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull state;
+@property (nonatomic, readonly, copy) NSString * _Nullable currentProductId;
+@property (nonatomic, readonly) BOOL willAutoRenew;
+@property (nonatomic, readonly, copy) NSString * _Nullable autoRenewPreference;
+@property (nonatomic, readonly, copy) NSDate * _Nullable renewalDate;
+@property (nonatomic, readonly, copy) NSString * _Nullable expirationReason;
+@property (nonatomic, readonly, copy) NSDate * _Nullable gracePeriodExpirationDate;
+@property (nonatomic, readonly, strong) PaymentTransaction * _Nullable transaction;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 SWIFT_CLASS("_TtC18StoreKit2Framework18PaymentTransaction") SWIFT_AVAILABILITY(ios,introduced=15.0)
 @interface PaymentTransaction : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull transactionId;
@@ -421,6 +471,8 @@ SWIFT_CLASS("_TtC18StoreKit2Framework18PaymentTransaction") SWIFT_AVAILABILITY(i
 @property (nonatomic, readonly) BOOL isUpgraded;
 @property (nonatomic, readonly, copy) NSDate * _Nullable revocationDate;
 @property (nonatomic, readonly, copy) NSString * _Nullable revocationReason;
+@property (nonatomic, readonly, copy) NSDate * _Nullable expirationDate;
+@property (nonatomic, readonly, copy) NSString * _Nonnull environment;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
